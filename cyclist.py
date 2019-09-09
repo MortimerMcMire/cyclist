@@ -48,7 +48,7 @@ def parse_events(ex_event_dict):
 def create_cycles(data,eventdict,start,end):
         '''returns a dataframe of cut cycle data based on input events'''
         completeDf = pd.DataFrame(columns=data.columns)
-        column_name_import = list(data.columns)
+        column_name_import = list(data.reset_index().columns)
         column_name_export = []
         
         (seq_start,seq_end) = eventdict.determine_event_ranges('start','end')
@@ -58,14 +58,18 @@ def create_cycles(data,eventdict,start,end):
                 for x in range(0,len(t)):
                         new_name = t[x] + ('_' + str(i+1))
                         column_name_export.append(new_name)
+
         
         for i in range(0,len(seq_start)):
                 cutdf = pd.DataFrame(columns=data.columns)
                 cutdf = data[(data.index > seq_start[i]) & (data.index < seq_end[i])].reset_index()
                 index_col = data.index.name
-                cutdf.drop(columns=index_col,inplace=True)
+
+                if index_col == None:
+                        index_col = 'index'
+                #cutdf.drop(columns=index_col,inplace=True)
                 if i == 0:
-                        completeDf = completeDf.append(cutdf, ignore_index=True)
+                        completeDf = completeDf.append(cutdf,ignore_index=True,sort=False)[cutdf.columns.tolist()]
                 else:
                         completeDf = pd.concat([completeDf,cutdf], axis=1,ignore_index=True)
 
