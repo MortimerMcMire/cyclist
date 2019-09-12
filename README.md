@@ -1,6 +1,8 @@
 # cyclist
 Event-based data analysis framework
 
+Cyclist allows you to split dataframes at predetermined "events". For instance, with an EMG channel measured during exercise you may capture the moment flexion and extension happens via motion capture. You can input the timing of your flexion and extension events into dictionaries and pass that into the create cycles function which will return the EMG cycles cut from first event 1 to stop event 1, and then first event 2 to stop event 2. Or, pass the same event twice, which will split the file into multiple parts from each event. 
+
 Class: eventDict, extends defaultdict
 
 New eventDict:  
