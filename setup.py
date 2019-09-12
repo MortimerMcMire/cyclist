@@ -6,16 +6,14 @@ with open("README.md", "r") as fh:
 
 setup(
     name="cyclist",
-    version="0.0.7",
+    version="0.0.1",
     author="Ben Andrews",
     author_email="mortimermcmiresa@gmail.com",
     description="Cycle-based data analysis toolbox",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/MortimerMcMire/cyclist",
-    packages=find_packages('src'),
-	package_dir={'': 'src'},
-	include_package_data=True,
+    packages=find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
